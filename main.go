@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"sbom2doc-go/output"
-	"sbom2doc-go/sbom"
+	"github.com/thanakritks/sbom-2-doc-go/output"
+	"github.com/thanakritks/sbom-2-doc-go/sbom"
 )
 
 func main() {

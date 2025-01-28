@@ -3,7 +3,7 @@ package output
 import (
     "encoding/xml"
     "os"
-    "sbom2doc-go/sbom"
+    "github.com/thanakritks/sbom-2-doc-go/sbom"
 )
 
 func GenerateXML(sbom sbom.SBOM, outputFile string) error {
