@@ -1,0 +1,14 @@
+{
+  "components": [
+    {
+      "name": "libcurl",
+      "version": "7.58.0",
+      "license": "MIT"
+    },
+    {
+      "name": "openssl",
+      "version": "1.1.1",
+      "license": "Apache-2.0"
+    }
+  ]
+}
