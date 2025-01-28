@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-
-	"github.com/thanakritks/sbom-2-doc-go.git/output"
+	"sbom2doc-go/output"
 )
 
 // SBOM represents the structure of the SBOM JSON
@@ -29,8 +28,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Read the SBOM file
 	sbomFile := os.Args[1]
+	outputFormat := os.Args[2]
+	outputFile := "output." + outputFormat // Default output file name
+
+	// Allow custom output file name
+	if len(os.Args) > 3 {
+		outputFile = os.Args[3]
+	}
+
+	// Read the SBOM file
 	data, err := ioutil.ReadFile(sbomFile)
 	if err != nil {
 		fmt.Printf("Error reading SBOM file: %s\n", err)
@@ -45,14 +52,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Determine the output format
-	outputFormat := os.Args[2]
-	outputFile := "output." + outputFormat // Default output file name
-	if len(os.Args) > 3 {
-		outputFile = os.Args[3] // Custom output file name
-	}
-
-	// Generate the output based on the format
+	// Generate the output based on the chosen format
 	switch outputFormat {
 	case "txt":
 		err = output.GenerateTXT(sbom, outputFile)
@@ -68,9 +68,9 @@ func main() {
 	}
 
 	if err != nil {
-		fmt.Printf("Error generating %s output: %s\n", outputFormat, err)
+		fmt.Printf("Error generating %s: %s\n", outputFormat, err)
 		os.Exit(1)
 	}
 
-	fmt.Printf("Output successfully written to %s\n", outputFile)
+	fmt.Printf("Successfully generated %s\n", outputFile)
 }

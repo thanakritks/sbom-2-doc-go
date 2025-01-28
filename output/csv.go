@@ -3,13 +3,38 @@ package output
 import (
 	"encoding/csv"
 	"os"
-
-	"github.com/thanakritks/sbom-2-doc-go.git/main"
+	"sbom2doc-go/main"
 )
 
-// GenerateCSV generates a CSV file from the SBOM
 func GenerateCSV(sbom main.SBOM, outputFile string) error {
-	file, err := os.Create(outputFile)
+	file, err := os.Create(outputFile)package output
+
+	import (
+		"encoding/csv"
+		"os"
+		"sbom2doc-go/main"
+	)
+	
+	func GenerateCSV(sbom main.SBOM, outputFile string) error {
+		file, err := os.Create(outputFile)
+		if err != nil {
+			return err
+		}
+		defer file.Close()
+	
+		writer := csv.NewWriter(file)
+		defer writer.Flush()
+	
+		// Write header
+		writer.Write([]string{"Name", "Version", "License"})
+	
+		// Write components
+		for _, component := range sbom.Components {
+			writer.Write([]string{component.Name, component.Version, component.License})
+		}
+	
+		return nil
+	}
 	if err != nil {
 		return err
 	}
@@ -18,18 +43,12 @@ func GenerateCSV(sbom main.SBOM, outputFile string) error {
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
 
-	// Write the header
-	header := []string{"Name", "Version", "License"}
-	if err := writer.Write(header); err != nil {
-		return err
-	}
+	// Write header
+	writer.Write([]string{"Name", "Version", "License"})
 
-	// Write the SBOM data
+	// Write components
 	for _, component := range sbom.Components {
-		record := []string{component.Name, component.Version, component.License}
-		if err := writer.Write(record); err != nil {
-			return err
-		}
+		writer.Write([]string{component.Name, component.Version, component.License})
 	}
 
 	return nil
