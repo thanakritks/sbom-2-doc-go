@@ -1,26 +1,28 @@
 package output
 
 import (
-	"fmt"
-	"sbom2doc-go/main"
-
-	"github.com/jung-kurt/gofpdf"
+    "github.com/jung-kurt/gofpdf"
+    "sbom2doc-go/sbom"
 )
 
-func GeneratePDF(sbom main.SBOM, outputFile string) error {
-	pdf := gofpdf.New("P", "mm", "A4", "")
-	pdf.AddPage()
-	pdf.SetFont("Arial", "B", 16)
-	pdf.Cell(40, 10, "Software Bill of Materials (SBOM)")
+func GeneratePDF(sbom sbom.SBOM, outputFile string) error {
+    pdf := gofpdf.New("P", "mm", "A4", "")
+    pdf.AddPage()
+    pdf.SetFont("Arial", "B", 12)
 
-	pdf.Ln(12)
-	pdf.SetFont("Arial", "", 12)
+    for _, component := range sbom.Components {
+        pdf.Cell(40, 10, "Name: "+component.Name)
+        pdf.Ln(10)
+        pdf.Cell(40, 10, "Version: "+component.Version)
+        pdf.Ln(10)
+        pdf.Cell(40, 10, "License: "+component.License)
+        pdf.Ln(20)
+    }
 
-	for _, component := range sbom.Components {
-		line := fmt.Sprintf("* %s - Version: %s, License: %s", component.Name, component.Version, component.License)
-		pdf.Cell(40, 10, line)
-		pdf.Ln(8)
-	}
+    err := pdf.OutputFileAndClose(outputFile)
+    if err != nil {
+        return err
+    }
 
-	return pdf.OutputFileAndClose(outputFile)
+    return nil
 }

@@ -1,25 +1,24 @@
 package output
 
 import (
-	"fmt"
-	"os"
-	"sbom2doc-go/main"
+    "fmt"
+    "os"
+    "github.com/thanakritks/sbom-2-doc-go/sbom"
 )
 
-func GenerateTXT(sbom main.SBOM, outputFile string) error {
-	file, err := os.Create(outputFile)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
+func GenerateTXT(sbom sbom.SBOM, outputFile string) error {
+    file, err := os.Create(outputFile)
+    if err != nil {
+        return err
+    }
+    defer file.Close()
 
-	header := "Software Bill of Materials (SBOM)\n===============================\n\n"
-	file.WriteString(header)
+    for _, component := range sbom.Components {
+        _, err := fmt.Fprintf(file, "Name: %s, Version: %s, License: %s\n", component.Name, component.Version, component.License)
+        if err != nil {
+            return err
+        }
+    }
 
-	for _, component := range sbom.Components {
-		line := fmt.Sprintf("* %s - Version: %s, License: %s\n", component.Name, component.Version, component.License)
-		file.WriteString(line)
-	}
-
-	return nil
+    return nil
 }
