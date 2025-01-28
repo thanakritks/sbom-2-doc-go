@@ -3,6 +3,7 @@ package output
 import (
 	"encoding/csv"
 	"os"
+
 	"github.com/thanakritks/sbom-2-doc-go.git/main"
 )
 
