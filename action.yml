@@ -1,0 +1,32 @@
+name: 'SBOM file generator'
+description: 'generate document file from Software Bill of Materials (SBOM)'
+author: 'ITQAD Team'
+
+# Add your action's branding here. This will appear on the GitHub Marketplace.
+# branding:
+#   icon: 'heart'
+#   color: 'red'
+
+# Define your inputs here.
+inputs:
+  github-token:
+    description: 'Github token'
+    required: true
+    default: ${{ github.token }}
+  severity-threshold:
+    description: 'Minimum failed severity threshold'
+    required: true
+    default: high
+  output-type-file:
+    description: 'Output file name'
+    required: true
+    default: txt
+  output-file:
+    description: 'Output file name'
+    required: true
+    default: sbom.txt
+    
+    # Define the main entry point for the action.
+runs:
+    using: 'node12'
+    main: 'index.js'
