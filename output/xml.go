@@ -4,7 +4,7 @@ import (
 	"encoding/xml"
 	"os"
 
-	"github.com/thanakritks/sbom-2-doc-go/sbom"
+	"github.com/corp-ais/sbom-to-doc/sbom"
 )
 
 func GenerateXML(sbom sbom.SBOM, outputFile string) error {

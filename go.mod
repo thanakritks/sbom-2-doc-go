@@ -1,4 +1,4 @@
-module github.com/thanakritks/sbom-2-doc-go
+module github.com/corp-ais/sbom-to-doc
 
 go 1.22.6
 

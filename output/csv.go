@@ -4,7 +4,7 @@ import (
 	"encoding/csv"
 	"os"
 
-	"github.com/thanakritks/sbom-2-doc-go/sbom"
+	"github.com/corp-ais/sbom-to-doc/sbom"
 )
 
 func GenerateCSV(sbom sbom.SBOM, outputFile string) error {
@@ -17,12 +17,11 @@ func GenerateCSV(sbom sbom.SBOM, outputFile string) error {
 	writer := csv.NewWriter(file)
 	defer writer.Flush()
 
-	 // Write header with box
-	 writer.Write([]string{"╭──────────────╮"})
-	 writer.Write([]string{"│ SBOM Summary │"})
-	 writer.Write([]string{"╰──────────────╯"})
-	 writer.Write([]string{}) // Empty line for spacing
-
+	// Write header with box
+	writer.Write([]string{"╭──────────────╮"})
+	writer.Write([]string{"│ SBOM Summary │"})
+	writer.Write([]string{"╰──────────────╯"})
+	writer.Write([]string{}) // Empty line for spacing
 
 	// Write header
 	writer.Write([]string{"Name", "Version", "License"})
