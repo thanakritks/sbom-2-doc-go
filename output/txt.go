@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/corp-ais/sbom-to-doc/sbom"
+	"github.com/thanakritks/sbom-2-doc-go/sbom"
 )
 
 func GenerateTXT(sbom sbom.SBOM, outputFile string) error {

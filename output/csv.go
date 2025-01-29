@@ -4,7 +4,7 @@ import (
 	"encoding/csv"
 	"os"
 
-	"github.com/corp-ais/sbom-to-doc/sbom"
+	"github.com/thanakritks/sbom-2-doc-go/sbom"
 )
 
 func GenerateCSV(sbom sbom.SBOM, outputFile string) error {

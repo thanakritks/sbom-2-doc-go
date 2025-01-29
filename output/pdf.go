@@ -2,7 +2,7 @@ package output
 
 import (
 	"github.com/jung-kurt/gofpdf"
-	"github.com/corp-ais/sbom-to-doc/sbom"
+	"github.com/thanakritks/sbom-2-doc-go/sbom"
 )
 
 func GeneratePDF(sbom sbom.SBOM, outputFile string) error {

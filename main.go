@@ -6,8 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/corp-ais/sbom-to-doc/output"
-	"github.com/corp-ais/sbom-to-doc/sbom"
+	"github.com/thanakritks/sbom-2-doc-go/output"
+	"github.com/thanakritks/sbom-2-doc-go/sbom"
 )
 
 func main() {
